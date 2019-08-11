@@ -1,0 +1,119 @@
+﻿@using Entities.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@await Component.InvokeAsync("NToastNotify")
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PhotoManager</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css"
+              integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+<header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Photo Manager</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1 just-ct-sp-between">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <input type="button" value="My Uploads" class="btn btn-warning font-larger" onclick="location.href = '@Url.Action("Index", "Home", new { filterName = "MyUploads" })'" />
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <input type="button" value="Top contributors" class="btn btn-success font-larger" onclick="location.href = '@Url.Action("Index", "Home", new { filterName = "TopContributors"})'" />
+                        </li>
+                        <li class="nav-item">
+                            <input type="button" value="Most Rated" class="btn btn-info font-larger" onclick="location.href = '@Url.Action("Index", "Home", new { filterName = "MostRated"})'" />
+                        </li>
+                        <li class="nav-item">
+                            <input type="button" value="Last Week" class="btn btn-danger font-larger" onclick="location.href = '@Url.Action("Index", "Home", new { filterName = "LastWeek"})'" />
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <input type="button" value="Create Post" class="btn btn-primary font-larger" onclick="location.href = '@Url.Action("Create", "Posts")'" />
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <section id="footer">
+        <!-- Include Font Awesome Stylesheet in Header -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <div class="container">
+            <div class="row" style="justify-content: space-evenly;">
+                <div class="text-center">
+                    <a href="callto:+380982159299"><i id="social-phn" class="fa fa-phone-square fa-3x social"></i></a>
+                    <a href="skype:live:nikita_kildibekov?call"><i id="social-skp" class="fa fa-skype fa-3x social"></i></a>
+                    <a href="mailto:#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+                </div>
+                <div class="text-center author-name">
+                    Nikita Kildibekov
+                </div>
+                <div class="text-center">
+                    <a href="https://www.facebook.com/"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+                    <a href="https://twitter.com"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+                    <a href="https://www.instagram.com/"><i id="social-instagram" class="fa fa-instagram fa-3x social"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

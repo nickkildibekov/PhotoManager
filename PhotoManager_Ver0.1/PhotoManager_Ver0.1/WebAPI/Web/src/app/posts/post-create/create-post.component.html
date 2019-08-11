@@ -1,0 +1,45 @@
+<form #form = ngForm autocomplete="off" (ngSubmit)="onSubmit(Title,Description,Image)">
+        <div class="card border-primary mb-3">
+                <div class="card-header bg-primary">
+                    <h3 class="card-title">Create Post</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input required ngModel #Title name="Title" id="Title" class="form-control col-sm-7"/>                        
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-10 col-form-label"> Image</label>
+                                    <div class="col-sm-10">
+                                        <div class="custom-file">
+                                            <img [src]="imageUrl"  style="width:250px;height:200px">
+                                            <input  type="file"  #Image  accept="image/*" (change)="handleFileInput($event.target.files)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea required  ngModel #Description name="Description" id="Description" class="form-control" rows="12" cols="80"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                        <div class="row just-ct-evenly">
+                            <div class="form-group">
+                                <input type="button" value="Back to list" class="btn btn-primary" (click) = "onBack()"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary" [disabled]="Image.value=== ''|| !form.valid"/>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+</form>

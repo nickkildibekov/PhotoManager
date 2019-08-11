@@ -1,0 +1,42 @@
+ <header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+      <div class="container">
+        <a class="navbar-brand" (click)='defaultFilter()'>Photo Manager</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+          <ul class="navbar-nav flex-grow-1 just-ct-sp-between">
+            <li class="nav-item" *ngIf="isActivated">
+              <button type="button" class="btn btn-warning font-larger" (click)='onUploadsFilter()'>My Uploads</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-success font-larger" (click)='topContribFilter()'>Top contributors</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-info font-larger" (click)='mostRatedFilter()'>Most Rated</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-danger font-larger" (click)='lastWeekFilter()'>Last Week</button>
+            </li>
+            <li class="nav-item" *ngIf="isActivated">
+              <button class="btn btn-primary font-larger" routerLink="posts/create">Create</button>
+            </li>
+            <li class="nav-item" *ngIf="isActivated">
+             <span><b>{{firstName}}</b></span> <br> <span><b>{{lastName}}</b></span>
+            </li>
+            <li class="nav-item"  *ngIf="isActivated">
+              <button class="btn btn-secondary font-larger" (click)='onLogout()'><i>Log Out</i></button>
+            </li>
+            <li class="nav-item" *ngIf="!isActivated">
+              <button class="btn btn-secondary font-larger" routerLink="users/login"><i>Login</i></button>
+            </li>
+            <li class="nav-item" *ngIf="!isActivated">
+              <button class="btn btn-secondary font-larger" routerLink="users/registration"><i>Register</i></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>

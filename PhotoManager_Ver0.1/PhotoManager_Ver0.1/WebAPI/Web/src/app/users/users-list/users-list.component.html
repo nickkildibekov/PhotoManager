@@ -1,0 +1,20 @@
+<div class="row just-ct-sp-between">
+    <table class="table table-hover" id="top-users">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Posts Amount</th>
+                <th scope="col">Total Rating</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let user of userList | topContrib: topContribVal">
+                <tr >
+                    <th class="counterCell"></th>
+                    <td>{{user.Posts[0].AuthorFullName}}</td>
+                    <td>{{user.Posts?.length}}</td>
+                    <td>{{getTotalRating(user.Posts)}}</td>
+               </tr>
+        </tbody>            
+    </table>
+</div>

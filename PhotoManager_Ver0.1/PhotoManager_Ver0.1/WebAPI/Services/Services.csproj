@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup>
+  <NoWarn>$(NoWarn);NU1701</NoWarn>
+</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\DTO\DTO.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
+  </ItemGroup>
+
+</Project>

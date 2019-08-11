@@ -1,0 +1,40 @@
+<h1>Details</h1>
+<div>
+    <div class="row details-top">
+        <div class="col-md-6">
+            <span>Author: </span>
+            <span>{{post?.AuthorFullName}}</span>
+        </div>
+        <div class="col-md-6">
+            <span>Posted: </span>
+            <span>{{post?.PostedDateTime | date }}</span>
+        </div>
+    </div>
+    <hr />
+    <div class="container details-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <p><b>Title:</b><br>{{post?.Title}}</p>
+                </div>
+                <div class="row">
+                    <p><b>Description:</b><br>{{post?.Description}}</p>
+                </div>
+                <div class="row">
+                    <p><b>Rating:</b>{{post?.Rating}}<br>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <img class="img-fluid" src="assets/{{post?.ImagePath}}" alt="Post image"
+                    asp-append-version="true" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row just-ct-evenly">
+    <input type="button" value="Back" class="btn btn-primary font-larger" (click)="onBack()" />
+    <input type="button" value="Edit Post" class="btn btn-warning font-larger" (click)="onEdit(post.Id)" />
+    <input type="button" value="Delete Post" class="btn btn-danger font-larger" (click)="onDelete(post.Id)" />
+
+</div>

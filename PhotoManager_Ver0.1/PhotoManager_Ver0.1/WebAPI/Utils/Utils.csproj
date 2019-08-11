@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+	<NoWarn>$(NoWarn);MSB3277</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Features">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.http.features\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\system.identitymodel.tokens.jwt\5.3.0\lib\netstandard2.0\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

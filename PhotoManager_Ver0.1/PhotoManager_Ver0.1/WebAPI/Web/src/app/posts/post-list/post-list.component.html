@@ -1,0 +1,58 @@
+<div class="row just-ct-sp-between">
+    <div *ngIf="postList?.length == 0">
+        <p class="font-italic text-center">
+            No posts in database
+        </p>
+    </div>
+    <div *ngFor="let post of postList | myUploads: filterCurUserId |  mostRated: mostrtd | lastWeek: lwfilter | paginate: { itemsPerPage: 8, currentPage: p } "
+        class="col-md-3 d-flex align-items-stretch">
+        <div class="card card-main border-success">
+            <div class="card-header just-ct-sp-between row">
+                <div>{{post.AuthorFullName}}</div>
+                <div><small>{{post.PostedDateTime | date}}</small></div>
+            </div>
+            <div class="card-body container">
+                <h4 class="card-title">{{post.Title}}</h4>
+                <img class="card-img-top" src="assets/{{post.ImagePath}}" alt="Post image"
+                    (click)="postDetails(post.Id)" />
+                <p class="card-text">
+                    <small>
+                        {{post.Description | slice:0:60}}<span *ngIf="post.Description.length > 60">...</span>
+                    </small>
+                </p>
+                <div class="row main-card-inside just-ct-sp-between" *ngIf="curUserId !== post.ApplicationUserId">
+                    <div class="col-4">
+                        <div class="row">
+                            <i class="fa fa-thumbs-up mr-2" (click)='like(post)'></i>
+                            <span *ngIf="likedPostId === post.Id">{{curLikes}}</span>
+                            <span *ngIf="likedPostId !== post.Id">{{post.Likes?.length}}</span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <i class="fa fa-thumbs-down mr-2" (click)='disLike(post)'></i>
+                            <span *ngIf="disLikedPostId === post.Id">{{curDisLikes}}</span>
+                            <span *ngIf="disLikedPostId !== post.Id">{{post.DisLikes?.length}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row" style="justify-content: space-around;">
+                        <span *ngIf="likedPostId !== post.Id && disLikedPostId !== post.Id">Rating:
+                            {{post?.Rating}}</span>                        
+                        <span *ngIf="likedPostId === post.Id || disLikedPostId === post.Id ">Rating:
+                            {{getRating()}}</span>
+                    </div>
+                </div>
+                <div class="row main-card-inside just-ct-sp-between" *ngIf="curUserId === post.ApplicationUserId">
+                    <div class="col-8"><span><i>YOUR POST</i></span></div>
+                    <div>
+                        <span>Rating: {{post?.Rating}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center" *ngIf="postList?.length">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
